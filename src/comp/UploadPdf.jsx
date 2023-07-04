@@ -6,6 +6,7 @@ import { Button, Input } from "@material-tailwind/react";
 import { CloudArrowUpIcon} from '@heroicons/react/24/outline'
 import { AppContext } from '../AuthContext';
 import { doc, setDoc ,Timestamp} from "firebase/firestore"; 
+import { ToastContainer, toast } from 'react-toastify';
 
 const UploadPdf = ()=>{
     const {currentUser}  = useContext(AppContext);
@@ -14,44 +15,51 @@ const UploadPdf = ()=>{
     // Handle file upload event and update state 
     function handleChange(event) {
         setFile(event.target.files[0]);
+        event.target.value = null;
     } 
 
     
-    const handleUpload =  async () => {
+    const handleUpload =  async (e) => {
         if (!file) {
-            alert("Please upload an Pdf first!");
+            toast.warning("Please uplaod an PDF first!");
+            // alert("Please upload an Pdf first!");
+            return;
+        } else{
+            try{
+
+                const userId  = currentUser.uid;
+                // console.log(`users/${uid}/${file.name}`);
+                const fileRef = ref(storage, `users/${userId}/${file.name}`);
+                await uploadBytes(fileRef, file);
+                // console.log(`Uploaded ${file.name} on file Storage successfully`);
+    
+                const DownloadUrl = await getDownloadURL(fileRef);
+                await uploadFirestore(DownloadUrl);
+                setFile("");
+    
+            }catch(error){
+                toast.error("Error while uploading file to storage:", error);
+                console.log("Error while uploading file to storage:", error);
+            }
         }
 
-        try{
+      
 
-            const userId  = currentUser.uid;
-            // console.log(`users/${uid}/${file.name}`);
-            const fileRef = ref(storage, `users/${userId}/${file.name}`);
-            await uploadBytes(fileRef, file);
-            console.log(`Uploaded ${file.name} on file Storage successfully`);
-
-            const DownloadUrl = await getDownloadURL(fileRef);
-            uploadFirestore(DownloadUrl);
-            setFile("");
-
-        }catch(error){
-            console.log("Erro while uploading file to storage:", error);
-        }
     };
 
     const uploadFirestore = async (url) => {
 
-    const userId = currentUser.uid;
-     const nameValue = file.name;
+    const userId = await currentUser.uid;
+     const nameValue = await file.name;
      await setDoc(doc(db, "datas",userId,'pdfs', nameValue), {
         downloadUrl:url,
-       title: file.name,
+       title: nameValue,
        createdAt: Timestamp.fromDate(new Date()),
         owner: userId,
         sharedWith:[] 
       });
 
-     console.log('PDF uploaded on Firestore & document created successfully!');
+     toast.success("PDF uploaded on Firestore & document created successfully!")
 
     } 
  
@@ -65,8 +73,9 @@ const UploadPdf = ()=>{
                     <input type="file" onChange={handleChange} accept=".pdf" />
                 </label>
             </Button> 
-            <Input type="text"  placeholder='Enter file Name' />
             <Button color="red" onClick={handleUpload}>Upload </Button>
+            <ToastContainer/>
+
 
         </div>
     

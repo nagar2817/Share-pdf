@@ -11,7 +11,10 @@ import {
     Typography
   } from "@material-tailwind/react";
 
+
+  
 const Home = ()=>{
+  
     const {currentUser,pdfFiles} = useContext(AppContext);
     let navigate = useNavigate();
 
@@ -29,7 +32,7 @@ const Home = ()=>{
           href="/"
           className="mx-auto cursor-pointer py-1.5 font-medium"
         >
-          Welcome to the Share Meta App
+          Welcome to the Share Meta App 
         </Typography>
       <UploadPdf />
       <SearchBox />

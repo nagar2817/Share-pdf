@@ -4,6 +4,7 @@ import { auth } from "./firebase-config";
 import { collection, query, where, getDocs,getDoc,doc,addDoc } from 'firebase/firestore';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import {storage,db} from './firebase-config';
+import { ToastContainer,toast } from "react-toastify";
 
 export const AppContext = createContext();
 
@@ -14,6 +15,7 @@ const ContextProvider = ({children})=>{
     const [userProfile,setUserProfile ] = useState({});
     const [activeFile,setActiveFile] = useState('');
     const [otherUsers,setOtherUsers] = useState([]);
+    const [shareActive,setShareActive] = useState('');
 
     useEffect( ()=> {
         const fecthAuth = async ()=>{
@@ -26,6 +28,7 @@ const ContextProvider = ({children})=>{
                         setCurrentUser(user);
                         resolve(user);
                       } else {
+                        toast.error("User not authenticate");
                         reject(new Error('User not authenticated.'));
                       }
                     });
@@ -82,9 +85,7 @@ const ContextProvider = ({children})=>{
      fecthAuth();
     
             
-    },[])
-
-    
+    }) 
 
 
     return(
@@ -98,9 +99,12 @@ const ContextProvider = ({children})=>{
             userProfile,
             activeFile,
             setActiveFile,
-            otherUsers
+            otherUsers,
+            shareActive,
+            setShareActive
         }}>
             {children}
+            <ToastContainer/>
         </AppContext.Provider>
     )
 }

@@ -9,6 +9,8 @@ import {auth} from '../firebase-config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login =  ()=> {
   const {setCurrentUser,currentUser} = useContext(AppContext)
@@ -33,12 +35,18 @@ const Login =  ()=> {
       setEmail('')
       setPassword('');
       sessionStorage.setItem('Auth Token', user._tokenResponse.refreshToken)
+      toast.success('Successfull Login !',{
+        position: toast.POSITION.TOP_CENTER
+      });
     } catch(error){
       alert("please try again"); 
       console.error(error);
     }
     
+    
   }
+
+
   return (
     <div className="w-80 mx-auto mt-10 pt-5">
 
@@ -61,6 +69,7 @@ const Login =  ()=> {
         <Button className="mt-6" fullWidth >
               Sign with Google
         </Button>
+        <ToastContainer />
         <Typography color="gray" className="mt-4 text-center font-normal">
         Not have an account?{" "}
         <a

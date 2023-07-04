@@ -14,12 +14,15 @@ import { storage } from "../firebase-config";
 import { useContext,useState } from "react";
 import { AppContext } from "../AuthContext";
 import Dropdown from "./Dropdown";
+import ShareModel from "./Model";
+
+
 
 
 const ListComponent = ({file})=>{
-    const {currentUser,setPdfFiles,pdfFiles,usersIds,setActiveFile,userProfile,otherUsers}= useContext(AppContext);
+    const {currentUser,setPdfFiles,pdfFiles,usersIds,setActiveFile,userProfile,shareActive,setShareActive}= useContext(AppContext);
     let navigate = useNavigate();
-    const handleDelete= async ()=>{
+    const handleDelete= async ()=>{ 
         const storage = getStorage();
         const userId = currentUser.uid;
         const fileRef = ref(storage,`users/${userId}/${file.name}`);
@@ -39,8 +42,9 @@ const ListComponent = ({file})=>{
     }
 
     const viewhandler = ()=>{
-        // console.log(file);
+        console.log(file);
         setActiveFile(file);
+
         navigate(`/${file.name}`); 
     }
 
@@ -67,26 +71,33 @@ const ListComponent = ({file})=>{
         }
       };
 
+      const toDropdown = ()=> { 
+        // console.log(file);
+        setShareActive(file.name);
+        console.log("sharacitive",shareActive);
+        navigate(`/sharePdf/${file.name}`) 
+      }
+
     return (   
     <div className="mx-auto mt-10 mb-10 pt-5 flex">
         <ListItem ripple={false} className="py-1 mr-10 pr-1 pl-4 w-80">
-         {file.name} 
+         {file.name}  
         </ListItem> 
         <div className="flex gap-4 justify-between">
-          <Dropdown onSharePdf={handleSharePdf} />
-
+          {/* <Dropdown onSharePdf={handleSharePdf} />  */} 
+          <Button onClick={toDropdown}>share </Button>
           <Button color="red" onClick={handleDelete}  className="flex items-center gap-2" > 
-          Delete
+          Delete  
           <TrashIcon className="h-6 w-6 text-white-500" /> 
           </Button>
           
-          <Button color="green" className="flex items-center gap-2" >
+          <Button color="green" className="flex items-center gap-2" > 
           <span> <a href={file.url}> Download</a></span>
           <ArrowDownTrayIcon className="h-6 w-6 text-white-500" />
           </Button>
 
           <Button onClick={viewhandler}>
-          View Pdf 
+          View Pdf  
           </Button>
 
           {/* <Button  onClick={retrieveComments}>

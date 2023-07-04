@@ -63,7 +63,7 @@ const Comments = ({  currentUserId }) => {
           const commentRef = doc(db,"datas",id,"pdfs",activeFile.name,"comments",commentId);
           await updateDoc(commentRef,{
             body:text
-          })
+          }) 
           console.log("updates");
           return { ...backendComment, body: text };
         }

@@ -6,6 +6,7 @@ import Register from './comp/signUp';
 import Home from './comp/Home';
 import PdfViewerComponent from './comp/PDFViewer';
 import Comments from './comp/CommentSecion/Comments';
+import ShareModel from './comp/Model';
 
 const  App = ()=> {
   return (
@@ -16,6 +17,7 @@ const  App = ()=> {
         <Route  path='/register' element={<Register />}/>
         <Route  path='/' element={<Home />}/>
         <Route path = "/:pdfName" element={<PdfViewerComponent/>} ></Route>
+        <Route path='/sharePdf/:pdfName' element={<ShareModel />}  />
         <Route/>
       </Routes>
     </div>
