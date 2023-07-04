@@ -66,9 +66,6 @@ const Login =  ()=> {
         <Button className="mt-6" fullWidth onClick={handleLogin} >
               Login
         </Button>
-        <Button className="mt-6" fullWidth >
-              Sign with Google
-        </Button>
         <ToastContainer />
         <Typography color="gray" className="mt-4 text-center font-normal">
         Not have an account?{" "}
