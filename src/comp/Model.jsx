@@ -33,10 +33,6 @@ const ShareModel=()=> {
   const handleSharePdf = async () => {
     const userId = userProfile.id
     console.log(shareActive); 
-    if(selectedUsers.length()===0){
-      toast.warning("please select some users");
-      return;
-    }
     
     try { 
       const pdfRef = doc(db, "datas",userId,"pdfs",shareActive);
