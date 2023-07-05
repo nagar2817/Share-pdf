@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# SharePDF
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SharePDF is a simple web application that allows users to upload and share PDF files with others. It provides an easy way to store and distribute PDF documents securely. This repository contains the source code and documentation for the SharePDF project.
 
-## Available Scripts
+![SharePDF Screenshot](screenshot.png)
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Upload PDF Files:** Users can upload their PDF files to the application securely.
+- **Share Files:** Once uploaded, users can generate a unique URL for each file and share it with others.
+- **Download Files:** Users can download the shared PDF files using the generated URLs.
+- **Secure Storage:** The uploaded files are securely stored using Firebase Storage, ensuring data privacy.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend:** React and Tailwind css with some uses of Toast library
+- **Backend:** Node.js
+- **Database:** Firebase Firestore
+- **Authentication:** Firebase Authentication
+- **Storage:** Firebase Storage
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To run SharePDF locally, follow these steps:
 
-### `npm run build`
+1. Clone the repository:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone https://github.com/nagar2817/share-pdf.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Navigate to the project directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+cd share-pdf
+```
 
-### `npm run eject`
+3. Install the dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Set up the Firebase configuration:
+   
+   - Create a Firebase project at [firebase.google.com](https://firebase.google.com) if you haven't already.
+   - Enable Firebase Authentication and Firestore in your project.
+   - Obtain the Firebase configuration details (API keys, project ID, etc.) for your Firebase project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5. Set up the environment variables:
+   
+   - Create a `.env` file in the root directory.
+   - Add the following variables to the `.env` file:
+   
+     ```plaintext
+     PORT=3000
+     FIREBASE_API_KEY=<your_firebase_api_key>
+     FIREBASE_AUTH_DOMAIN=<your_firebase_auth_domain>
+     FIREBASE_PROJECT_ID=<your_firebase_project_id>
+     FIREBASE_STORAGE_BUCKET=<your_firebase_storage_bucket>
+     ```
+   
+   - Replace `<your_firebase_api_key>`, `<your_firebase_auth_domain>`, `<your_firebase_project_id>`, and `<your_firebase_storage_bucket>` with your Firebase configuration details.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+6. Start the application:
 
-## Learn More
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+7. Open your browser and visit `http://localhost:3000` to access SharePDF.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Usage
 
-### Code Splitting
+1. Open the SharePDF application in your web browser.
+2. Click on the "Choose File" button to select a PDF file from your local machine.
+3. Click on the "Upload" button to upload the selected file.
+4. After the file is uploaded, you will be provided with a unique URL for sharing the file.
+5. Copy the URL and share it with others.
+6. To download a shared file, simply open the provided URL in a web browser and click on the "Download" button.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Contributing
 
-### Analyzing the Bundle Size
+Contributions are welcome! If you find any bugs or have suggestions for new features, please open an issue or submit a pull request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Before contributing, please make sure to read the [Contributing Guidelines](CONTRIBUTING.md).
 
-### Making a Progressive Web App
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This project is licensed under the [MIT License](LICENSE).
 
-### Advanced Configuration
+## Contact
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+If you have any questions or need assistance, please feel free to reach out:
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Email: nagar.2@iitj.ac.in
+- Twitter: [@0xRohit_](https://
