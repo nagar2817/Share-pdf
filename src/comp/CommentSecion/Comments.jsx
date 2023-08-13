@@ -10,6 +10,7 @@ import {
 import { AppContext } from "../../AuthContext";
 import { collection,addDoc,updateDoc,doc,deleteDoc, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
+import { ToastContainer,toast } from "react-toastify";
 
 const Comments = ({  currentUserId }) => {
     const {activeFile,userProfile}  = useContext(AppContext);
@@ -65,9 +66,11 @@ const Comments = ({  currentUserId }) => {
             body:text
           }) 
           console.log("updates");
+          toast.success("upadtes");
           return { ...backendComment, body: text };
+        }else{
+          return backendComment;
         }
-        return backendComment;
       });
       setBackendComments(updatedBackendComments);
       setActiveComment(null);
@@ -80,6 +83,7 @@ const Comments = ({  currentUserId }) => {
           if(backendComment.id === commentId) {
               await deleteDoc(doc(db,"datas",id,"pdfs",activeFile.name,"comments",commentId));
         console.log('created');
+        toast.success("deleted");
             return;
           }else{
             return backendComment;
@@ -108,6 +112,7 @@ setBackendComments(listcomments);
       <h3 className="comments-title">Comments</h3>
       <div className="comment-form-title">Write comment</div>
       <CommentForm submitLabel="Write" handleSubmit={addComment} />
+      <ToastContainer />
       <div className="comments-container">
         {rootComments.map((rootComment) => (
           <Comment

@@ -20,7 +20,6 @@ const ContextProvider = ({children})=>{
     useEffect( ()=> {
         const fecthAuth = async ()=>{
             try{
-                
                 const user = await new Promise((resolve, reject) => {
                     onAuthStateChanged(auth, (user) => {
                       if (user) {
@@ -28,7 +27,7 @@ const ContextProvider = ({children})=>{
                         setCurrentUser(user);
                         resolve(user);
                       } else {
-                        toast.error("User not authenticate");
+                        // toast.error("User not authenticate");
                         reject(new Error('User not authenticated.'));
                       }
                     });
@@ -85,7 +84,7 @@ const ContextProvider = ({children})=>{
      fecthAuth();
     
             
-    }) 
+    },[]) 
 
 
     return(

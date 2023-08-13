@@ -14,6 +14,8 @@ const PDFReader = ()=>{
     return (
         <div style={{ width: "70%", height: "100vh" }} >
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js">
+            {/* <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js"> */}
+
             <Viewer
                 fileUrl={activeFile.working_URL}
                 plugins={[
